@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flappy_bird/Bird.dart';
+import 'package:flappy_bird/InGameItems/Bird.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
