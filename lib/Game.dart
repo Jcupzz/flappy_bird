@@ -7,6 +7,13 @@ import 'package:flame/game/base_game.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/gestures.dart';
 import 'package:flame/sprite.dart';
+import 'package:flappy_bird/InGameItems/bird.dart';
+import 'package:flappy_bird/InGameItems/floor.dart';
+import 'package:flappy_bird/InGameItems/pipe_set.dart';
+import 'package:flappy_bird/InGameItems/score.dart';
+import 'package:flappy_bird/InGameItems/titles.dart';
+import 'package:flappy_bird/game_state.dart';
+import 'package:flappy_bird/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 

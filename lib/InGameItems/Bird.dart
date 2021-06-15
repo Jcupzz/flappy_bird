@@ -1,6 +1,9 @@
 import 'package:flame/anchor.dart';
 import 'package:flame/components/animation_component.dart';
 import 'package:flame/flame.dart';
+import 'package:flappy_bird/game_state.dart';
+import 'package:flappy_bird/main.dart';
+import 'package:flappy_bird/options.dart';
 
 import 'package:sensors_plus/sensors_plus.dart';
 

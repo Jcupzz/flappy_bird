@@ -1,19 +1,15 @@
+import 'package:flame/flame.dart';
 import 'package:flappy_bird/Home.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+Size size;
+var spriteSheet;
+bool isAutoJump = false;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Home(),
-    );
-  }
+  size = await Flame.util.initialDimensions();
+  spriteSheet = await Flame.images.load("sprites.png");
+
+  runApp(MaterialApp(home: Home()));
 }
