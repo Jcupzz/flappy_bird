@@ -16,6 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with WidgetsBindingObserver {
   FavoriteMethod _method = FavoriteMethod.manualJump;
+  bool showvalue = false;
 
   @override
   void dispose() {
@@ -27,6 +28,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) => showAlert(context));
   }
 
   @override
@@ -55,7 +57,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () => showAlert(context));
+    // Future.delayed(Duration.zero, () => showAlert(context));
     return Scaffold(
       body: Stack(
         children: [
@@ -65,7 +67,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               top: MediaQuery.of(context).size.height * 0.05,
               child: GestureDetector(
                 onTap: () {
-                  gameState = GameState.pause;
+                  gameState = GameState.gameover;
                   showDialog(
                       context: context,
                       builder: (context) {
@@ -111,6 +113,19 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
 
                                   Navigator.pop(context);
                                 }),
+                            Container(
+                              width: double.infinity,
+                              height: 80,
+                              child: Checkbox(
+                                tristate: true,
+                                value: showvalue,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    showvalue = value;
+                                  });
+                                },
+                              ),
+                            ),
                           ],
                           elevation: 20,
                           shape: RoundedRectangleBorder(
@@ -131,6 +146,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
 
   showAlert(BuildContext context) {
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (builder) {
           return SimpleDialog(
