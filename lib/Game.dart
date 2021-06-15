@@ -49,7 +49,6 @@ class MyGame extends BaseGame with TapDetector {
       ..add(_titles)
       ..add(_score);
     // ..add(_settings);
-
     print("Auto Jump is : " + isAutoJump.toString());
 
     if (isAutoJump) {
@@ -97,6 +96,13 @@ class MyGame extends BaseGame with TapDetector {
   }
 
   @override
+  void onDetach() {
+    // TODO: implement onDetach
+    super.onDetach();
+    Flame.bgm.stop();
+  }
+
+  @override
   void update(double t) {
     super.update(t);
 
@@ -119,7 +125,7 @@ class MyGame extends BaseGame with TapDetector {
     }
   }
 
-  void setGameover() {
+  void setGameover() async {
     // Flame.audio.play("hit.wav");
     Flame.audio.play("die.mp3");
     gameState = GameState.gameover;

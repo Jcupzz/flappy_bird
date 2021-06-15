@@ -1,4 +1,5 @@
 import 'package:flame/flame.dart';
+import 'package:flame/flame_audio.dart';
 import 'package:flappy_bird/Home.dart';
 import 'package:flutter/material.dart';
 

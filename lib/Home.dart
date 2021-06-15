@@ -1,3 +1,6 @@
+import 'package:flame/bgm.dart';
+import 'package:flame/flame.dart';
+import 'package:flame/flame_audio.dart';
 import 'package:flame/game/widget_builder.dart';
 import 'package:flappy_bird/Game.dart';
 import 'package:flappy_bird/game_state.dart';
@@ -11,19 +14,43 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with WidgetsBindingObserver {
   FavoriteMethod _method = FavoriteMethod.manualJump;
-  Widget pauseMenuBuilder(BuildContext buildContext, MyGame game) {
-    return Center(
-      child: Container(
-        width: 100,
-        height: 100,
-        color: const Color(0xFFFF0000),
-        child: const Center(
-          child: Text('Paused'),
-        ),
-      ),
-    );
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        print("app in resumed");
+        Flame.bgm.resume();
+        break;
+      case AppLifecycleState.inactive:
+        print("app in inactive");
+        Flame.bgm.stop();
+        break;
+      case AppLifecycleState.paused:
+        print("app in paused");
+        Flame.bgm.stop();
+
+        break;
+      case AppLifecycleState.detached:
+        print("app in detached");
+        Flame.bgm.stop();
+
+        break;
+    }
   }
 
   @override
@@ -161,15 +188,25 @@ class _HomeState extends State<Home> {
                 height: 5,
               ),
               Text(
-                "Auto Jump and Manual Jump.In Auto jump mode the bird jumps continuosly on tilt up.In Manual Jump mode the bird jumps only once when tilted up. By default it is manual jump. Try it in the settings menu",
+                "Auto Jump and Manual Jump.Try it in the settings menu",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.normal),
               ),
-              IconButton(
-                  onPressed: () {},
-                  icon: Image.asset("assets/images/start_button_1.png"))
+              SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Flame.bgm.play("game.mp3");
+                },
+                child: Container(
+                    child: Image.asset(
+                  "assets/images/start_button_1.png",
+                )),
+              )
             ],
           );
         });
