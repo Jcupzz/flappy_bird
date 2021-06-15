@@ -45,7 +45,7 @@ class Bird extends AnimationComponent {
     switch (gameState) {
       case GameState.pause:
         this.speedY = -500;
-        Flame.audio.play("bubble_pop.mp3", volume: 0.5);
+        // Flame.audio.play("bubble_pop.mp3", volume: 0.5);
         break;
       case GameState.play:
         this.speedY = -500;

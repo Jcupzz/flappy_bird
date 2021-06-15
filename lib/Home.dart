@@ -49,16 +49,20 @@ class _HomeState extends State<Home> {
                           ),
                           contentPadding: EdgeInsets.fromLTRB(15, 20, 15, 20),
                           children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  isAutoJump = true;
 
-                            ElevatedButton(onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Auto-Jump")),
+                            ElevatedButton(
+                                onPressed: () {
+                                  isAutoJump = false;
 
-
-                              
-                            }, child: Text("Auto-Jump")),
-
-
-
-
+                                  Navigator.pop(context);
+                                },
+                                child: Text("Manual")),
 
                             // RadioListTile(
                             //     title: Text(

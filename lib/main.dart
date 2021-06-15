@@ -6,6 +6,8 @@ Size size;
 var spriteSheet;
 bool isAutoJump = false;
 void main() async {
+  print("MAIN FUNCTION RAN");
+
   WidgetsFlutterBinding.ensureInitialized();
 
   size = await Flame.util.initialDimensions();
