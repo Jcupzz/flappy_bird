@@ -49,55 +49,58 @@ class _HomeState extends State<Home> {
                           ),
                           contentPadding: EdgeInsets.fromLTRB(15, 20, 15, 20),
                           children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  isAutoJump = true;
-
-                                  Navigator.pop(context);
-                                },
-                                child: Text("Auto-Jump")),
-                            ElevatedButton(
-                                onPressed: () {
-                                  isAutoJump = false;
-
-                                  Navigator.pop(context);
-                                },
-                                child: Text("Manual")),
-
-                            // RadioListTile(
-                            //     title: Text(
-                            //       "Auto-Jump",
-                            //       style: TextStyle(
-                            //           fontWeight: FontWeight.bold,
-                            //           fontSize: 18),
-                            //     ),
-                            //     value: FavoriteMethod.autoJump,
-                            //     groupValue: _method,
-                            //     onChanged: (value) {
-                            //       _method = value;
+                            // ElevatedButton(
+                            //     onPressed: () {
                             //       setState(() {
                             //         isAutoJump = true;
                             //       });
 
                             //       Navigator.pop(context);
-                            //     }),
-                            // RadioListTile(
-                            //     title: Text(
-                            //       "Manual-Jump",
-                            //       style: TextStyle(
-                            //           fontWeight: FontWeight.bold,
-                            //           fontSize: 18),
-                            //     ),
-                            //     value: FavoriteMethod.manualJump,
-                            //     groupValue: _method,
-                            //     onChanged: (value) {
-                            //       _method = value;
+                            //     },
+                            //     child: Text("Auto-Jump")),
+                            // ElevatedButton(
+                            //     onPressed: () {
                             //       setState(() {
                             //         isAutoJump = false;
                             //       });
-
                             //       Navigator.pop(context);
-                            //     }),
+                            //     },
+                            //     child: Text("Manual")),
+
+                            RadioListTile(
+                                title: Text(
+                                  "Auto-Jump",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                value: FavoriteMethod.autoJump,
+                                groupValue: _method,
+                                onChanged: (value) {
+                                  _method = value;
+                                  setState(() {
+                                    isAutoJump = true;
+                                  });
+
+                                  Navigator.pop(context);
+                                }),
+                            RadioListTile(
+                                title: Text(
+                                  "Manual-Jump",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                                value: FavoriteMethod.manualJump,
+                                groupValue: _method,
+                                onChanged: (value) {
+                                  _method = value;
+                                  setState(() {
+                                    isAutoJump = false;
+                                  });
+
+                                  Navigator.pop(context);
+                                }),
                           ],
                           elevation: 20,
                           shape: RoundedRectangleBorder(
