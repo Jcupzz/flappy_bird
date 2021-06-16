@@ -16,7 +16,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with WidgetsBindingObserver {
   FavoriteMethod _method = FavoriteMethod.manualJump;
-  bool showvalue = false;
+  bool showvalue = true;
+  bool startGame = false;
 
   @override
   void dispose() {
@@ -61,7 +62,11 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     return Scaffold(
       body: Stack(
         children: [
-          MyGame().widget,
+          startGame
+              ? MyGame().widget
+              : Container(
+                  color: Colors.green,
+                ),
           Positioned(
               left: MediaQuery.of(context).size.width * 0.05,
               top: MediaQuery.of(context).size.height * 0.05,
@@ -71,66 +76,81 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return SimpleDialog(
-                          title: Text(
-                            "Settings",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 22),
-                          ),
-                          contentPadding: EdgeInsets.fromLTRB(15, 20, 15, 20),
-                          children: [
-                            RadioListTile(
-                                title: Text(
-                                  "Auto-Jump",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                ),
-                                value: FavoriteMethod.autoJump,
-                                groupValue: _method,
-                                onChanged: (value) {
-                                  _method = value;
-                                  setState(() {
-                                    isAutoJump = true;
-                                  });
-
-                                  Navigator.pop(context);
-                                }),
-                            RadioListTile(
-                                title: Text(
-                                  "Manual-Jump",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                ),
-                                value: FavoriteMethod.manualJump,
-                                groupValue: _method,
-                                onChanged: (value) {
-                                  _method = value;
-                                  setState(() {
-                                    isAutoJump = false;
-                                  });
-
-                                  Navigator.pop(context);
-                                }),
-                            Container(
-                              width: double.infinity,
-                              height: 80,
-                              child: Checkbox(
-                                tristate: true,
-                                value: showvalue,
-                                onChanged: (bool value) {
-                                  setState(() {
-                                    showvalue = value;
-                                  });
-                                },
-                              ),
+                        return StatefulBuilder(builder: (context, setState) {
+                          return SimpleDialog(
+                            title: Text(
+                              "Settings",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22),
                             ),
-                          ],
-                          elevation: 20,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                        );
+                            contentPadding: EdgeInsets.fromLTRB(15, 20, 15, 20),
+                            children: [
+                              RadioListTile(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                  subtitle: Text(
+                                      "When Auto-Jump feature is turned on the bird jumps continuously  on tilted up"),
+                                  title: Text(
+                                    "Auto-Jump",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                  value: FavoriteMethod.autoJump,
+                                  groupValue: _method,
+                                  onChanged: (value) {
+                                    _method = value;
+                                    setState(() {
+                                      isAutoJump = true;
+                                    });
+
+                                    Navigator.pop(context);
+                                  }),
+                              RadioListTile(
+                                  contentPadding:
+                                      EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                  subtitle: Text(
+                                      "When Manual-Jump is turned on the bird jumps when tilted up and descends when tilted down. You have to tilt phone up and down to get the motion going. Manual-Jump is enabled by default."),
+                                  title: Text(
+                                    "Manual-Jump",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                  value: FavoriteMethod.manualJump,
+                                  groupValue: _method,
+                                  onChanged: (value) {
+                                    _method = value;
+                                    setState(() {
+                                      isAutoJump = false;
+                                    });
+
+                                    Navigator.pop(context);
+                                  }),
+                              Container(
+                                width: double.infinity,
+                                height: 80,
+                                child: CheckboxListTile(
+                                  value: showvalue,
+                                  title: Text("Background music"),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      showvalue = value;
+                                    });
+                                    if (showvalue) {
+                                      Flame.bgm.resume();
+                                    } else {
+                                      Flame.bgm.stop();
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                            elevation: 20,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                          );
+                        });
                       });
                 },
                 child: Image.asset(
@@ -158,7 +178,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               Row(
                 children: [
                   Text(
-                    "Hola!",
+                    "Hee-yah!",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
@@ -213,10 +233,23 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               SizedBox(
                 height: 10,
               ),
+              Text(
+                "Please hold you phone straight before starting the game",
+                style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  setState(() {
+                    startGame = true;
+                  });
                   Flame.bgm.play("game.mp3");
+                  Navigator.pop(context);
                 },
                 child: Container(
                     child: Image.asset(

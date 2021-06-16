@@ -1,6 +1,7 @@
 import 'package:flame/flame.dart';
 import 'package:flame/flame_audio.dart';
 import 'package:flappy_bird/Home.dart';
+import 'package:flappy_bird/SplashScreen.dart';
 import 'package:flutter/material.dart';
 
 Size size;
@@ -14,5 +15,5 @@ void main() async {
   size = await Flame.util.initialDimensions();
   spriteSheet = await Flame.images.load("sprites.png");
 
-  runApp(MaterialApp(home: Home()));
+  runApp(MaterialApp(home: SplashScreen()));
 }
