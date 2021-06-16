@@ -76,7 +76,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return StatefulBuilder(builder: (context, setState) {
+                        return StatefulBuilder(builder: (context, setStates) {
                           return SimpleDialog(
                             title: Text(
                               "Settings",
@@ -134,7 +134,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                                   value: showvalue,
                                   title: Text("Background music"),
                                   onChanged: (value) {
-                                    setState(() {
+                                    setStates(() {
                                       showvalue = value;
                                     });
                                     if (showvalue) {

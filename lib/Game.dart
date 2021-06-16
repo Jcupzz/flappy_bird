@@ -53,9 +53,9 @@ class MyGame extends BaseGame with TapDetector {
 
     if (isAutoJump) {
       accelerometerEvents.listen((event) {
-        print("x: " + event.x.toString());
-        print("y: " + event.y.toString());
-        print("z: " + event.z.toString());
+        // print("x: " + event.x.toString());
+        // print("y: " + event.y.toString());
+        // print("z: " + event.z.toString());
 
         x = event.x;
         y = event.y;
@@ -69,9 +69,9 @@ class MyGame extends BaseGame with TapDetector {
       });
     } else {
       accelerometerEvents.listen((event) {
-        print("x: " + event.x.toString());
-        print("y: " + event.y.toString());
-        print("z: " + event.z.toString());
+        // print("x: " + event.x.toString());
+        // print("y: " + event.y.toString());
+        // print("z: " + event.z.toString());
 
         x = event.x;
         y = event.y;
