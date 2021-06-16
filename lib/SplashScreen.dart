@@ -11,23 +11,42 @@ class SplashScreen extends StatelessWidget {
     });
 
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: Shimmer.fromColors(
-        baseColor: Theme.of(context).hintColor,
-        highlightColor: Colors.white,
-        period: Duration(milliseconds: 1000),
-        child: Container(
-          padding: EdgeInsets.all(16),
-          child: Center(
-            child: Text(
-              "Lefty.",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2
-                  .apply(fontSizeFactor: 10, fontFamily: 'Lobster'),
-            ),
+      body: Stack(
+        children: [
+          Image.asset(
+            "assets/images/bg.png",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
           ),
-        ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                  child: Image.asset(
+                "assets/images/flappy_bird_yellow.png",
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: MediaQuery.of(context).size.width * 0.5,
+              )),
+              Shimmer.fromColors(
+                baseColor: Colors.black,
+                highlightColor: Colors.white,
+                period: Duration(milliseconds: 1000),
+                child: Container(
+                    padding: EdgeInsets.all(16),
+                    child: Text(
+                      "Flappy Bird",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 60,
+                        fontFamily: "LobsterTwo",
+                      ),
+                    )),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
