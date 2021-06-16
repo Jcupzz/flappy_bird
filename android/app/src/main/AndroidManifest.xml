@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dubecreations.flappy_bird">
    <application
-        android:label="flappy_bird"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Flappy Bird"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

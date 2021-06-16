@@ -34,6 +34,11 @@ dependencies:
   shimmer: ^2.0.0
   flutter_launcher_icons: ^0.9.0
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/flappy_bird_yellow.png"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
